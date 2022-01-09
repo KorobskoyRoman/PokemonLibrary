@@ -12,15 +12,16 @@ class ViewController: UITableViewController {
     var pokemons = [Pokemon]()
     let searchController = UISearchController(searchResultsController: nil)
     let networkingManager = NetworkingManager()
-    let defaultPokemons = ["pikachu", "bulbasaur", "ivysaur", "venusaur", "charmander", "charmeleon", "charizard"]
+    private lazy var footerView = FooterView()
     
     private var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        networkingManager.fetchPokemon()
+        searchBar(searchController.searchBar, textDidChange: "pikachu")
+        tableView.tableFooterView = footerView
+        setupNavigationBar()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,13 +29,9 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PokemonCell
         let pokemon = pokemons[indexPath.row]
-//        var content = cell.defaultContentConfiguration()
-//        content.image = #imageLiteral(resourceName: "25")
-//        content.text = "\(pokemon)"
-//        content.imageProperties.cornerRadius = 33
-//        cell.contentConfiguration = content
+        cell.set(pokemon: pokemon)
         
         return cell
     }
@@ -43,24 +40,42 @@ class ViewController: UITableViewController {
         return 75
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "В данный момент данных нет.\n Введите информацию в строку поиска выше."
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.numberOfLines = 0
+        
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return pokemons.count > 0 ? 0 : 75
+    }
+    
+    private func setupNavigationBar() {
+        let navBar = UINavigationBar()
+        navBar.prefersLargeTitles = true
+    }
+    
     private func setupSearchBar() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.placeholder = "Enter pokemon name..."
         searchController.searchBar.delegate = self
         searchController.searchBar.autocapitalizationType = .none
+        searchController.hidesNavigationBarDuringPresentation = false
     }
     
-    // *** СОЗДАТЬ ЯЧЕЙКУ ТАБЛИЦЫ ***
-    
-//    private func refreshLabels() {
-//        let pokemon = [Pokemon]()
-//        nameLabel.text = pokemon.first!.name
-//
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetails" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let pokemons = pokemons[indexPath.row]
+            let destVC = segue.destination as! DetailsViewController
+            destVC.pokemonModel = [pokemons]
+        }
+    }
 }
 
 extension ViewController: UISearchBarDelegate {
@@ -69,13 +84,30 @@ extension ViewController: UISearchBarDelegate {
         self.timer?.invalidate()
         
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [self] _ in
+            footerView.showLoader()
             
             self.networkingManager.fetchPokemon(searchText: searchText) { [weak self] searchResults in
                 self?.pokemons = [searchResults]
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
+                    footerView.hideLoader()
                 }
             }
         })
     }
 }
+
+// фильтр для поиска сохраненных покемонов, тут не работает из-за API
+//
+//extension ViewController: UISearchResultsUpdating {
+//    func updateSearchResults(for searchController: UISearchController) {
+//        filterContentForSearchText(searchController.searchBar.text!)
+//    }
+//
+//    private func filterContentForSearchText(_ searchText: String) {
+//        let filteredPokemons = pokemons.filter {
+//            $0.name.contains(searchText)
+//        }
+//        tableView.reloadData()
+//    }
+//}

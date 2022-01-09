@@ -9,10 +9,19 @@ import Foundation
 
 struct Pokemon {
     var height: Int
+    var heightString: String {
+        return String(height)
+    }
     var name: String = "Loading..."
     var order: Int
+    var orderString: String {
+        return String(order)
+    }
     var frontDefault: String
     var weight: Int
+    var weightString: String {
+        return String(weight)
+    }
     
     init?(pokemonData: PokemonData) {
         height = pokemonData.height

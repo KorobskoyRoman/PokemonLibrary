@@ -20,7 +20,8 @@ struct NetworkingManager {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 print("error!!!")
-                return }
+                return
+            }
 //            print(String(data: data, encoding: .utf8) ?? "Ошибка получения данных")
             if let pokemon = self.parseJSON(withData: data) {
                 print(pokemon)
@@ -37,7 +38,7 @@ struct NetworkingManager {
             let pokemonData = try decoder.decode(PokemonData.self, from: data)
             guard let pokemon = Pokemon(pokemonData: pokemonData) else { return nil }
             return pokemon
-        } catch let error as NSError {
+        } catch let error {
             print("Ошибка!!! \(error.localizedDescription)")
         }
         return nil
