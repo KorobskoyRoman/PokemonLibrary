@@ -29,15 +29,31 @@ class DetailsViewController: UIViewController {
     }
     
     private func refreshLabels() {
-        
+    
         pokemonNameLabel.text = pokemonModel.first?.name
         guard let url = URL(string: pokemonModel.first?.frontDefault ?? "") else { return }
         pokemonImage.sd_setImage(with: url, completed: nil)
         pokedexNumber.text = pokemonModel.first?.orderString
-        
+
         segmentedFirst.text = "Height:"
         segmentedSecond.text = "Weight:"
         segmentedThird.text = pokemonModel.first?.heightString
         segmentedFourth.text = pokemonModel.first?.weightString
+        
+    }
+    @IBAction func segmentedControllPressed(_ sender: UISegmentedControl) {
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            
+            segmentedFirst.text = "Height:"
+            segmentedSecond.text = "Weight:"
+            segmentedThird.text = pokemonModel.first?.heightString
+            segmentedFourth.text = pokemonModel.first?.weightString
+        } else {
+            segmentedFirst.text = "Main ability of selected pokemon:"
+            segmentedSecond.text = pokemonModel.first!.abilityName
+            segmentedThird.isHidden = true
+            segmentedFourth.isHidden = true
+        }
     }
 }

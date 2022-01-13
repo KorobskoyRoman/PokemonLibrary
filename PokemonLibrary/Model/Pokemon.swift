@@ -8,6 +8,8 @@
 import Foundation
 
 struct Pokemon {
+    
+    var abilityName: String
     var height: Int
     var heightString: String {
         return String(height)
@@ -24,6 +26,7 @@ struct Pokemon {
     }
     
     init?(pokemonData: PokemonData) {
+        abilityName = pokemonData.abilities.first!.ability.name
         height = pokemonData.height
         name = pokemonData.name
         order = pokemonData.order
