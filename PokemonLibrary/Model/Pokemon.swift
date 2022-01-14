@@ -20,6 +20,7 @@ struct Pokemon {
         return String(order)
     }
     var frontDefault: String
+    var frontShiny: String
     var weight: Int
     var weightString: String {
         return String(weight)
@@ -31,6 +32,7 @@ struct Pokemon {
         name = pokemonData.name
         order = pokemonData.order
         frontDefault = pokemonData.sprites.frontDefault
+        frontShiny = pokemonData.sprites.frontShiny
         weight = pokemonData.weight
     }
 }

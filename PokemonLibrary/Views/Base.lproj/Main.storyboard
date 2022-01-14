@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
+        <!--View Controller-->
         <scene sceneID="ZLG-LS-A9O">
             <objects>
                 <tableViewController id="IZW-Jc-O2f" customClass="ViewController" customModule="PokemonLibrary" customModuleProvider="target" sceneMemberID="viewController">
@@ -77,7 +77,7 @@
                             <outlet property="delegate" destination="IZW-Jc-O2f" id="549-sP-JYZ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Search" largeTitleDisplayMode="always" id="E8h-JC-Phb"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="E8h-JC-Phb"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z2i-Ew-aNr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -143,7 +143,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="2x4-LM-Rcq">
-                                <rect key="frame" x="15" y="264" width="384" height="147"/>
+                                <rect key="frame" x="15" y="284" width="384" height="147"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NLh-c8-hXA">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="32"/>
@@ -196,14 +196,30 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="df5-x4-d4a">
+                                <rect key="frame" x="20" y="242" width="115" height="34"/>
+                                <color key="backgroundColor" red="0.98901265859603882" green="0.98420292139053345" blue="0.00016268194303847849" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Show shiny">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="showShinyAction:" destination="0Uj-0h-uIc" eventType="touchUpInside" id="oOk-l0-F3y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ag4-AP-jzH"/>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="2x4-LM-Rcq" firstAttribute="top" secondItem="df5-x4-d4a" secondAttribute="bottom" constant="8" symbolic="YES" id="8QM-ve-hUK"/>
                             <constraint firstItem="muc-Io-nAB" firstAttribute="leading" secondItem="Ag4-AP-jzH" secondAttribute="leading" constant="20" id="AZ2-X3-ooS"/>
                             <constraint firstItem="Ag4-AP-jzH" firstAttribute="trailing" secondItem="2x4-LM-Rcq" secondAttribute="trailing" constant="15" id="Be3-AJ-8MC"/>
+                            <constraint firstItem="df5-x4-d4a" firstAttribute="leading" secondItem="Ag4-AP-jzH" secondAttribute="leading" constant="20" id="OLO-dt-yOS"/>
                             <constraint firstItem="2x4-LM-Rcq" firstAttribute="leading" secondItem="Ag4-AP-jzH" secondAttribute="leading" constant="15" id="Q6P-QI-2M4"/>
-                            <constraint firstItem="2x4-LM-Rcq" firstAttribute="top" secondItem="muc-Io-nAB" secondAttribute="bottom" constant="30" id="oks-Pb-j9u"/>
+                            <constraint firstItem="df5-x4-d4a" firstAttribute="top" secondItem="muc-Io-nAB" secondAttribute="bottom" constant="8" symbolic="YES" id="gSa-pk-YEI"/>
+                            <constraint firstItem="Ag4-AP-jzH" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="df5-x4-d4a" secondAttribute="trailing" symbolic="YES" id="kPh-Yp-zpi"/>
+                            <constraint firstItem="2x4-LM-Rcq" firstAttribute="top" secondItem="muc-Io-nAB" secondAttribute="bottom" constant="50" id="oks-Pb-j9u"/>
                             <constraint firstItem="muc-Io-nAB" firstAttribute="top" secondItem="Ag4-AP-jzH" secondAttribute="top" id="r4T-UE-Vzl"/>
                             <constraint firstItem="Ag4-AP-jzH" firstAttribute="trailing" secondItem="muc-Io-nAB" secondAttribute="trailing" constant="20" id="zXY-x4-Xi0"/>
                         </constraints>
@@ -218,6 +234,7 @@
                         <outlet property="segmentedFourth" destination="vL4-ME-SFl" id="Y6b-iN-Go5"/>
                         <outlet property="segmentedSecond" destination="aKi-Yt-BAm" id="Ki1-Jj-w7h"/>
                         <outlet property="segmentedThird" destination="rh7-vj-O0N" id="A12-1S-EEq"/>
+                        <outlet property="showShinyButton" destination="df5-x4-d4a" id="kNA-xn-Jw0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyZ-lS-gtt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -233,6 +250,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="kyZ-Pb-7Hl">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -241,7 +261,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uzT-o0-ltt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="144.92753623188406" y="97.767857142857139"/>
+            <point key="canvasLocation" x="329" y="98"/>
         </scene>
     </scenes>
     <resources>

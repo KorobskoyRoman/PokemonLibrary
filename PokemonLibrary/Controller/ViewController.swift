@@ -18,6 +18,8 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Search pokemon"
         setupSearchBar()
         searchBar(searchController.searchBar, textDidChange: "pikachu")
         tableView.tableFooterView = footerView
@@ -62,7 +64,7 @@ class ViewController: UITableViewController {
     private func setupSearchBar() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.searchBar.placeholder = "Enter pokemon name..."
+        searchController.searchBar.placeholder = "Enter pokemon id or name..."
         searchController.searchBar.delegate = self
         searchController.searchBar.autocapitalizationType = .none
         searchController.hidesNavigationBarDuringPresentation = false
