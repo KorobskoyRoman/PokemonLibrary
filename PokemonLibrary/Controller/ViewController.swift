@@ -32,7 +32,7 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PokemonCell
-        let pokemon = pokemons[indexPath.row]
+        let pokemon = pokemons[indexPath.item]
         cell.set(pokemon: pokemon)
         
         return cell

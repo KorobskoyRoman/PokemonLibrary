@@ -21,6 +21,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet var segmentedFourth: UILabel!
     @IBOutlet var segmentedControl: UISegmentedControl!
     
+    @IBOutlet var imagePokemon: UIImageView!
     var pokemonModel = [Pokemon]()
     
     override func viewDidLoad() {
@@ -40,9 +41,11 @@ class DetailsViewController: UIViewController {
 
         segmentedFirst.text = "Height:"
         segmentedSecond.text = "Weight:"
-        segmentedThird.text = pokemonModel.first?.heightString
-        segmentedFourth.text = pokemonModel.first?.weightString
+        segmentedThird.text = "\(pokemonModel.first!.heightString) cm"
+        segmentedFourth.text = ("\(pokemonModel.first!.weightString) kg")
         
+        let urlArt = URL(string: pokemonModel.first!.artWorkFrontDefault)
+        imagePokemon.sd_setImage(with: urlArt, completed: nil)
     }
     
     @IBAction func segmentedControllPressed(_ sender: UISegmentedControl) {
@@ -54,8 +57,8 @@ class DetailsViewController: UIViewController {
             
             segmentedFirst.text = "Height:"
             segmentedSecond.text = "Weight:"
-            segmentedThird.text = pokemonModel.first!.heightString
-            segmentedFourth.text = pokemonModel.first!.weightString
+            segmentedThird.text = "\(pokemonModel.first!.heightString) cm"
+            segmentedFourth.text = ("\(pokemonModel.first!.weightString) kg")
         } else {
             segmentedFirst.text = "Main ability of selected pokemon:"
             segmentedSecond.text = pokemonModel.first!.abilityName
