@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import SwiftSVG
 
 class DetailsViewController: UIViewController {
 
@@ -21,7 +22,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet var segmentedFourth: UILabel!
     @IBOutlet var segmentedControl: UISegmentedControl!
     
-    @IBOutlet var imagePokemon: UIImageView!
+    @IBOutlet var imagePokemon1: UIImageView!
+    @IBOutlet var imagePokemon2: UIImageView!
     var pokemonModel = [Pokemon]()
     
     override func viewDidLoad() {
@@ -43,9 +45,12 @@ class DetailsViewController: UIViewController {
         segmentedSecond.text = "Weight:"
         segmentedThird.text = "\(pokemonModel.first!.heightString) cm"
         segmentedFourth.text = ("\(pokemonModel.first!.weightString) kg")
+    
+        guard let urlArt = URL(string: pokemonModel.first?.artWorkFrontDefault ?? "") else { return }
+        imagePokemon1.sd_setImage(with: urlArt, completed: nil)
         
-        let urlArt = URL(string: pokemonModel.first!.artWorkFrontDefault)
-        imagePokemon.sd_setImage(with: urlArt, completed: nil)
+        guard let urlHome = URL(string: pokemonModel.first?.homeFrontDefault ?? "") else {return}
+        imagePokemon2.sd_setImage(with: urlHome, completed: nil)
     }
     
     @IBAction func segmentedControllPressed(_ sender: UISegmentedControl) {

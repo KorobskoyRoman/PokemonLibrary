@@ -38,12 +38,12 @@ struct Sprites: Codable {
 }
 
 struct Other: Codable {
-    let dreamWorld: DreamWorld
+//    let dreamWorld: DreamWorld
     let home: Home
     let officialArtwork: OfficialArtwork
     
     enum CodingKeys: String, CodingKey {
-        case dreamWorld = "dream_world"
+//        case dreamWorld = "dream_world"
         case home
         case officialArtwork = "official-artwork"
     }
@@ -57,13 +57,13 @@ struct OfficialArtwork: Codable {
     }
 }
 
-struct DreamWorld: Codable {
-    let frontDefault: String
-    
-    enum CodingKeys: String, CodingKey {
-        case frontDefault = "front_default"
-    }
-}
+//struct DreamWorld: Codable {
+//    let frontDefault: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case frontDefault = "front_default"
+//    }
+//}
 
 struct Home: Codable {
     let frontDefault: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Pokemon: PokemonCellModel, SpritesCellProtocol {
+struct Pokemon: PokemonCellModel {
     
     var abilityName: String
     var height: Int
@@ -26,7 +26,7 @@ struct Pokemon: PokemonCellModel, SpritesCellProtocol {
         return String(weight / 10)
     }
     var artWorkFrontDefault: String
-    var dreamWorldFrontDefault: String
+//    var dreamWorldFrontDefault: String
     var homeFrontDefault: String
     
     init?(pokemonData: PokemonData) {
@@ -39,7 +39,7 @@ struct Pokemon: PokemonCellModel, SpritesCellProtocol {
         weight = pokemonData.weight
         
         artWorkFrontDefault = pokemonData.sprites.other?.officialArtwork.frontDefault ?? "No data"
-        dreamWorldFrontDefault = pokemonData.sprites.other?.dreamWorld.frontDefault ?? "No data"
+//        dreamWorldFrontDefault = pokemonData.sprites.other?.dreamWorld.frontDefault ?? "No data"
         homeFrontDefault = pokemonData.sprites.other?.home.frontDefault ?? "No data"
     }
 }

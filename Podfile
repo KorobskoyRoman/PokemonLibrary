@@ -7,5 +7,6 @@ target 'PokemonLibrary' do
 
   # Pods for PokemonLibrary
   pod 'SDWebImage'
+  pod 'SwiftSVG'
 
 end
